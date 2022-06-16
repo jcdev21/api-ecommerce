@@ -4,7 +4,16 @@ import bcrypt from 'bcrypt';
 import { IUserService } from './IUserService';
 
 class UserService implements IUserService {
+  public static _instance: UserService;
   private readonly userRepo: UserRepository = new UserRepository();
+
+  public static getInstance(): UserService {
+    if (!UserService._instance) {
+      UserService._instance = new UserService();
+    }
+
+    return UserService._instance;
+  }
 
   async createUser(req: Request) {
     throw new Error('Ada Error');
