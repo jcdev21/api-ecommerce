@@ -1,16 +1,28 @@
-import express from 'express';
+import express, { Application } from 'express';
 import compression from 'compression';
+import cors from 'cors';
 import { config as dotenv } from 'dotenv';
-import UserRepository from '@infra/repositories/UserRepository';
 
-const app = express();
+class App {
+  public app: Application;
 
-app.use(compression());
-dotenv();
+  constructor() {
+    this.app = express();
+    this.plugins();
+    dotenv();
+  }
 
-app.listen(3000);
+  protected plugins(): void {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(compression());
+    this.app.use(cors());
+  }
+}
 
-const repo1 = UserRepository.getInstance();
-const repo2 = UserRepository.getInstance();
+const app = new App().app;
+const PORT = process.env.PORT || 8000;
 
-console.log(repo1 === repo2);
+app.listen(PORT, () => {
+  console.log('Server is running on port ' + PORT);
+});

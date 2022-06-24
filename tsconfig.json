@@ -8,7 +8,10 @@
     "esModuleInterop": true,
     "baseUrl": "./src",
     "paths": {
-      "@infra/*": ["infra/*"]
+      "@infra/*": ["infra/*"],
+      "@controller/*": ["main/controllers/*"],
+      "@service/*": ["main/services/*"],
+      "@router/*": ["main/routers/*"]
     },
     "plugins": [{ "transform": "typescript-transform-paths" }]
   },

@@ -69,3 +69,7 @@ class UserRepository implements IUserRepository {
 }
 
 export default UserRepository;
+
+// IMPLEMENT SINGLETON DENGAN CARA LAIN
+// UserRepo akan menjadi singleton
+// export const UserRepo = new UserRepository();
