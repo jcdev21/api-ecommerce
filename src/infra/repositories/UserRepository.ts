@@ -5,6 +5,16 @@ import { Prisma } from '@prisma/client';
 const prisma = Connection.getInstance();
 
 class UserRepository implements IUserRepository {
+  private static _instance: UserRepository;
+
+  static getInstance(): UserRepository {
+    if (!UserRepository._instance) {
+      UserRepository._instance = new UserRepository();
+    }
+
+    return UserRepository._instance;
+  }
+
   async create(payload: Prisma.UserCreateInput): Promise<Prisma.UserCreateInput> {
     const user = await prisma.user.create({ data: payload });
     return user;

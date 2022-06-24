@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 import { IUserService } from './IUserService';
 
 class UserService implements IUserService {
-  public static _instance: UserService;
-  private readonly userRepo: UserRepository = new UserRepository();
+  private static _instance: UserService;
+  private readonly userRepo: UserRepository = UserRepository.getInstance();
 
   public static getInstance(): UserService {
     if (!UserService._instance) {
